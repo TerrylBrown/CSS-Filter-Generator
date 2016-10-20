@@ -1,0 +1,8 @@
+<!-- Image Template -->
+<img src="img/filter-image.jpg" class="img img-responsive" style="{{image.bindCssImage()}}">
+<div class="code">
+	<pre>filter:<span ng-repeat="filter in image.filtersData" 
+			ng-model="filter"
+			ng-if="filter.selected" 
+			ng-bind="image.bindCssCode($index)"></span>;</pre>
+</div>

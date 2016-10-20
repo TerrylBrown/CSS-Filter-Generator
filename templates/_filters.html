@@ -1,0 +1,74 @@
+<!-- Filters Partial -->
+<div class="filter" ng-repeat="filter in filters.filtersData">
+	<div ng-if="!filter.childValues">
+		<input type="checkbox" 
+			id="filter-{{filter.name}}" 
+			class="filter__checkbox"
+			ng-selected="{{filter.selected}}"
+			ng-model="filter.selected">								
+		<label for="filter-{{filter.name}}" 
+			ng-bind="filter.name"></label>
+		<div class="row">
+			<div class="col-sm-8">
+				<input type="range" 
+					class="filter__range" 
+					min="{{filter.minVal}}" 
+					max="{{filter.maxVal}}" 
+					step="{{filter.step}}" 
+					ng-value="{{filter.value}}" 
+					ng-model="filter.value"
+					data-orientation="horizontal">
+			</div>
+			<div class="col-sm-4">
+				<input type="number" 
+					class="filter__input" 
+					min="{{filter.minVal}}" 
+					max="{{filter.maxVal}}" 
+					step="{{filter.step}}" 
+					ng-value="{{filter.value}}"										
+					ng-model="filter.value"
+					string-to-number>										
+			</div>
+		</div>							
+	</div>
+	<div ng-if="filter.childValues">
+		<input type="checkbox" 
+			id="filter-{{filter.name}}" 
+			class="filter__checkbox"
+			ng-selected="{{filter.selected}}"
+			ng-model="filter.selected">
+		<label for="filter-{{filter.name}}" 
+			ng-bind="filter.name"></label>
+		<div class="filter__children-filters" ng-repeat="childFilter in filter.childValues">								
+			<p ng-bind="childFilter.name"></p>
+				<div class="row">
+					<div class="col-sm-8">
+						<input type="range" 
+							ng-if="childFilter.valType === 'px'"
+							min="{{childFilter.minVal}}" 
+							max="{{childFilter.maxVal}}" 
+							step="{{childFilter.step}}" 
+							ng-value="{{childFilter.value}}" 
+							ng-model="childFilter.value"
+							data-orientation="horizontal">
+						<input type="text"
+							ng-if="childFilter.valType === '#'"
+							class="filter__range" 
+							ng-value="{{childFilter.value}}"
+							ng-model="childFilter.value">
+					</div>
+					<div class="col-sm-4">
+						<input type="number" 
+							ng-if="childFilter.valType === 'px'"
+							class="filter__range" 
+							min="{{childFilter.minVal}}" 
+							max="{{childFilter.maxVal}}" 
+							step="{{childFilter.step}}" 
+							ng-value="{{childFilter.value}}"
+							ng-model="childFilter.value"
+							string-to-number>											
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

@@ -6,108 +6,30 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="Demo project with jQuery">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">	
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">	
 		<!-- <link rel="stylesheet" href="css/app.css"> -->
 	</head>
 	<body ng-app="filterApp">
-
 
 		<div class="container">
 			<div class="row">
 
 				<!-- Filters -->
 				<div class="col-sm-4" ng-controller="filtersCtrl as filters">
-					<div class="filter" ng-repeat="filter in filters.filtersData">
-						<div ng-if="!filter.childValues">
-							<input type="checkbox" 
-								id="filter-{{filter.name}}" 
-								class="filter__checkbox"
-								ng-selected="{{filter.selected}}"
-								ng-model="filter.selected">								
-							<label for="filter-{{filter.name}}" 
-								ng-bind="filter.name"></label>
-							<div class="row">
-								<div class="col-sm-8">
-									<input type="range" 
-										class="filter__range" 
-										min="{{filter.minVal}}" 
-										max="{{filter.maxVal}}" 
-										step="{{filter.step}}" 
-										ng-value="{{filter.value}}" 
-										ng-model="filter.value"
-										data-orientation="horizontal">
-								</div>
-								<div class="col-sm-4">
-									<input type="number" 
-										class="filter__input" 
-										min="{{filter.minVal}}" 
-										max="{{filter.maxVal}}" 
-										step="{{filter.step}}" 
-										ng-value="{{filter.value}}"										
-										ng-model="filter.value"
-										string-to-number>										
-								</div>
-							</div>							
-						</div>
-						<div ng-if="filter.childValues">
-							<input type="checkbox" 
-								id="filter-{{filter.name}}" 
-								class="filter__checkbox"
-								ng-selected="{{filter.selected}}"
-								ng-model="filter.selected">
-							<label for="filter-{{filter.name}}" 
-								ng-bind="filter.name"></label>
-							<div class="filter__children-filters" ng-repeat="childFilter in filter.childValues">								
-								<p ng-bind="childFilter.name"></p>
-									<div class="row">
-										<div class="col-sm-8">
-											<input type="range" 
-												ng-if="childFilter.valType === 'px'"
-												min="{{childFilter.minVal}}" 
-												max="{{childFilter.maxVal}}" 
-												step="{{childFilter.step}}" 
-												ng-value="{{childFilter.value}}" 
-												ng-model="childFilter.value"
-												data-orientation="horizontal">
-											<input type="text"
-												ng-if="childFilter.valType === '#'"
-												class="filter__range" 
-												ng-value="{{childFilter.value}}"
-												ng-model="childFilter.value">
-										</div>
-										<div class="col-sm-4">
-											<input type="number" 
-												ng-if="childFilter.valType === 'px'"
-												class="filter__range" 
-												min="{{childFilter.minVal}}" 
-												max="{{childFilter.maxVal}}" 
-												step="{{childFilter.step}}" 
-												ng-value="{{childFilter.value}}"
-												ng-model="childFilter.value"
-												string-to-number>											
-										</div>
-									</div>
-								</div>
-						</div>
-					</div>
+					<ng-include src="'templates/_filters.html'"></ng-include>
 				</div>
 
+				<!-- Image & Code -->
 				<div class="col-sm-8" ng-controller="imageCtrl as image">
-					<img src="img/filter-image.jpg" class="img img-responsive" style="{{image.bindCssImage()}}">
-					<div class="code">
-						<pre>filter:<span ng-repeat="filter in image.filtersData" 
-								ng-model="filter"
-								ng-if="filter.selected" 
-								ng-bind="image.bindCssCode($index)"></span>;</pre>
-					</div>
+					<ng-include src="'templates/_image.html'"></ng-include>
 				</div>
 
 			</div>
 		</div>
 
 		<!-- Scripts -->
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/controllers/filters.js"></script>
 		<script src="js/controllers/image.js"></script>
